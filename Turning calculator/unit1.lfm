@@ -1,12 +1,12 @@
 object Form1: TForm1
   Left = 583
-  Height = 364
+  Height = 378
   Top = 183
   Width = 597
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
-  Caption = 'Turning calculator 00:33 19/6/2026'
-  ClientHeight = 364
+  Caption = 'Turning calculator 01:33 19/6/2026'
+  ClientHeight = 378
   ClientWidth = 597
   Color = clWhite
   OnCreate = FormCreate
@@ -16,7 +16,7 @@ object Form1: TForm1
   object Button1: TButton
     Left = 208
     Height = 41
-    Top = 235
+    Top = 252
     Width = 105
     Caption = 'Start/Stop'
     TabOrder = 0
@@ -25,7 +25,7 @@ object Form1: TForm1
   object Image1: TImage
     Left = 158
     Height = 110
-    Top = 96
+    Top = 131
     Width = 421
     Images = ImageList1
     Transparent = True
@@ -33,7 +33,7 @@ object Form1: TForm1
   object SpinEdit1: TSpinEdit
     Left = 48
     Height = 23
-    Top = 5
+    Top = 40
     Width = 80
     OnEditingDone = SpinEdit1EditingDone
     TabOrder = 1
@@ -42,21 +42,21 @@ object Form1: TForm1
   object Label1: TLabel
     Left = 16
     Height = 15
-    Top = 8
+    Top = 43
     Width = 28
     Caption = 'RPM:'
   end
   object Label2: TLabel
     Left = 152
     Height = 15
-    Top = 13
+    Top = 48
     Width = 54
     Caption = 'GearRatio:'
   end
   object FloatSpinEdit1: TFloatSpinEdit
     Left = 216
     Height = 23
-    Top = 8
+    Top = 43
     Width = 80
     DecimalPlaces = 3
     Increment = 0.05
@@ -67,100 +67,100 @@ object Form1: TForm1
   object Label3: TLabel
     Left = 10
     Height = 15
-    Top = 56
+    Top = 91
     Width = 78
     Caption = 'Turning/Sec = '
   end
   object Label4: TLabel
     Left = 12
     Height = 15
-    Top = 32
+    Top = 67
     Width = 76
     Caption = 'Turning/ms = '
   end
   object Label5: TLabel
-    Left = 31
+    Left = 8
     Height = 15
-    Top = 248
+    Top = 280
     Width = 91
     Caption = 'Motor turn/sec ='
   end
   object Label6: TLabel
-    Left = 33
+    Left = 10
     Height = 15
-    Top = 224
+    Top = 256
     Width = 90
     Caption = 'Motor turn/ms ='
   end
   object Label7: TLabel
-    Left = 33
+    Left = 10
     Height = 15
-    Top = 296
+    Top = 328
     Width = 82
     Caption = 'Gear turn/sec ='
   end
   object Label8: TLabel
-    Left = 33
+    Left = 10
     Height = 15
-    Top = 272
+    Top = 304
     Width = 81
     Caption = 'Gear turn/ms ='
   end
   object Label9: TLabel
-    Left = 32
+    Left = 10
     Height = 15
-    Top = 320
+    Top = 0
     Width = 122
     Caption = 'SetpointLoop = 100 ms'
   end
   object Label10: TLabel
     Left = 408
     Height = 15
-    Top = 13
+    Top = 48
     Width = 76
     Caption = 'Turning/ms = '
   end
   object Label11: TLabel
     Left = 408
     Height = 15
-    Top = 37
+    Top = 72
     Width = 78
     Caption = 'Turning/Sec = '
   end
   object Label12: TLabel
-    Left = 387
+    Left = 416
     Height = 15
-    Top = 235
+    Top = 273
     Width = 74
     Caption = 'Stop Setpoint:'
   end
   object SpinEdit2: TSpinEdit
-    Left = 464
+    Left = 493
     Height = 23
-    Top = 232
+    Top = 270
     Width = 80
     OnEditingDone = SpinEdit2EditingDone
     TabOrder = 3
     Value = 250
   end
   object Label13: TLabel
-    Left = 388
+    Left = 417
     Height = 15
-    Top = 272
+    Top = 310
     Width = 30
     Caption = 'ms = '
   end
   object Label14: TLabel
-    Left = 387
+    Left = 416
     Height = 15
-    Top = 298
+    Top = 336
     Width = 32
     Caption = 'Sec = '
   end
   object HMIPolyline1: THMIPolyline
     Left = 32
     Height = 56
-    Top = 72
+    Top = 107
     Width = 145
     PointCoordinates = <    
       item
@@ -179,7 +179,7 @@ object Form1: TForm1
   object HMIPolyline2: THMIPolyline
     Left = 192
     Height = 72
-    Top = 32
+    Top = 67
     Width = 145
     PointCoordinates = <    
       item
@@ -198,7 +198,7 @@ object Form1: TForm1
   object HMIPolyline3: THMIPolyline
     Left = 376
     Height = 88
-    Top = 56
+    Top = 91
     Width = 145
     PointCoordinates = <    
       item
@@ -218,11 +218,66 @@ object Form1: TForm1
         Y = 80
       end>
   end
+  object Label15: TLabel
+    Left = 176
+    Height = 15
+    Top = 0
+    Width = 23
+    Caption = 'Cyc:'
+  end
+  object Label16: TLabel
+    Left = 288
+    Height = 15
+    Top = 0
+    Width = 49
+    Caption = 'Left over:'
+  end
+  object SpinEdit3: TSpinEdit
+    Left = 288
+    Height = 23
+    Top = 304
+    Width = 80
+    OnEditingDone = SpinEdit3EditingDone
+    TabOrder = 7
+    Value = 500
+  end
+  object Label17: TLabel
+    Left = 152
+    Height = 15
+    Top = 304
+    Width = 134
+    Caption = 'RampUpGearDelay in ms:'
+  end
+  object Label18: TLabel
+    Left = 152
+    Height = 15
+    Top = 328
+    Width = 109
+    Caption = 'OffsetTurningMotor:'
+  end
+  object FloatSpinEdit2: TFloatSpinEdit
+    Left = 288
+    Height = 23
+    Top = 328
+    Width = 80
+    DecimalPlaces = 3
+    Increment = 0.05
+    OnEditingDone = FloatSpinEdit2EditingDone
+    TabOrder = 8
+    Value = 1
+  end
+  object Label19: TLabel
+    Left = 152
+    Height = 15
+    Top = 352
+    Width = 101
+    Caption = 'ActualOffset_ms = '
+  end
   object ImageList1: TImageList
     Height = 110
     Width = 421
     Left = 32
-    Top = 128
+    Top = 163
     Bitmap = {
       4C7A01000000A50100006E000000973400000000000078DAEDDD79B87DD5FC07
       70F33C932133152125452A4D1A50515442B3345121A5A4242A0D44549A0BCD64
