@@ -1,12 +1,12 @@
 object Form1: TForm1
   Left = 583
-  Height = 378
+  Height = 433
   Top = 183
   Width = 597
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'Turning calculator 01:33 19/6/2026'
-  ClientHeight = 378
+  ClientHeight = 433
   ClientWidth = 597
   Color = clWhite
   OnCreate = FormCreate
@@ -65,7 +65,7 @@ object Form1: TForm1
     Value = 0.5
   end
   object Label3: TLabel
-    Left = 10
+    Left = 12
     Height = 15
     Top = 91
     Width = 78
@@ -144,16 +144,16 @@ object Form1: TForm1
     Value = 250
   end
   object Label13: TLabel
-    Left = 417
+    Left = 440
     Height = 15
-    Top = 310
+    Top = 328
     Width = 30
     Caption = 'ms = '
   end
   object Label14: TLabel
-    Left = 416
+    Left = 440
     Height = 15
-    Top = 336
+    Top = 352
     Width = 32
     Caption = 'Sec = '
   end
@@ -232,46 +232,79 @@ object Form1: TForm1
     Width = 49
     Caption = 'Left over:'
   end
-  object SpinEdit3: TSpinEdit
-    Left = 288
-    Height = 23
-    Top = 304
-    Width = 80
-    OnEditingDone = SpinEdit3EditingDone
+  object GroupBox1: TGroupBox
+    Left = 158
+    Height = 120
+    Top = 296
+    Width = 262
+    Caption = 'Offset'
+    ClientHeight = 100
+    ClientWidth = 258
+    ParentBackground = False
     TabOrder = 7
-    Value = 500
+    object SpinEdit3: TSpinEdit
+      Left = 144
+      Height = 23
+      Top = 32
+      Width = 80
+      OnEditingDone = SpinEdit3EditingDone
+      TabOrder = 0
+      Value = 500
+    end
+    object Label17: TLabel
+      Left = 8
+      Height = 15
+      Top = 32
+      Width = 134
+      Caption = 'RampUpGearDelay in ms:'
+    end
+    object Label18: TLabel
+      Left = 8
+      Height = 15
+      Top = 56
+      Width = 109
+      Caption = 'OffsetTurningMotor:'
+    end
+    object FloatSpinEdit2: TFloatSpinEdit
+      Left = 144
+      Height = 23
+      Top = 56
+      Width = 80
+      DecimalPlaces = 3
+      Increment = 0.05
+      OnEditingDone = FloatSpinEdit2EditingDone
+      TabOrder = 1
+      Value = 1
+    end
+    object Label19: TLabel
+      Left = 8
+      Height = 15
+      Top = 80
+      Width = 101
+      Caption = 'ActualOffset_ms = '
+    end
+    object CheckBox1: TCheckBox
+      Left = 8
+      Height = 19
+      Top = 8
+      Width = 86
+      Caption = 'Enable offset'
+      TabOrder = 2
+    end
   end
-  object Label17: TLabel
-    Left = 152
+  object Label20: TLabel
+    Left = 440
     Height = 15
     Top = 304
-    Width = 134
-    Caption = 'RampUpGearDelay in ms:'
+    Width = 76
+    Caption = 'Total duration:'
   end
-  object Label18: TLabel
-    Left = 152
+  object Label21: TLabel
+    Left = 10
     Height = 15
-    Top = 328
-    Width = 109
-    Caption = 'OffsetTurningMotor:'
-  end
-  object FloatSpinEdit2: TFloatSpinEdit
-    Left = 288
-    Height = 23
-    Top = 328
-    Width = 80
-    DecimalPlaces = 3
-    Increment = 0.05
-    OnEditingDone = FloatSpinEdit2EditingDone
-    TabOrder = 8
-    Value = 1
-  end
-  object Label19: TLabel
-    Left = 152
-    Height = 15
-    Top = 352
-    Width = 101
-    Caption = 'ActualOffset_ms = '
+    Top = 232
+    Width = 52
+    Caption = 'Calculate:'
   end
   object ImageList1: TImageList
     Height = 110

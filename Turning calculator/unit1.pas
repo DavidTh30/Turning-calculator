@@ -42,8 +42,10 @@ type
 
   TForm1 = class(TForm)
     Button1: TButton;
+    CheckBox1: TCheckBox;
     FloatSpinEdit1: TFloatSpinEdit;
     FloatSpinEdit2: TFloatSpinEdit;
+    GroupBox1: TGroupBox;
     HMIPolyline1: THMIPolyline;
     HMIPolyline2: THMIPolyline;
     HMIPolyline3: THMIPolyline;
@@ -61,6 +63,8 @@ type
     Label18: TLabel;
     Label19: TLabel;
     Label2: TLabel;
+    Label20: TLabel;
+    Label21: TLabel;
     Label3: TLabel;
     Label4: TLabel;
     Label5: TLabel;
@@ -149,7 +153,11 @@ begin
         //Motor01.O_TurnningMotorCounter_ms:=0;
         //Motor01.P_TurnningCounter_sec:=0;
       end;
-      if (Motor01.O_TurningGearCounter_ms>=Motor01.I_StopTurningSetpoint) then Motor01.I_MotorRun:=false;
+      if (Motor01.O_TurningGearCounter_ms>=Motor01.I_StopTurningSetpoint) then
+      begin
+        Motor01.I_MotorRun:=false;
+        CheckBox1.Enabled:=true;
+      end;
 
     end;
 
@@ -236,7 +244,9 @@ begin
   Motor01.I_RampUpGearDelay_ms:=500;
   Motor01.P_RampUpGearDelay_ms:=0;
   Motor01.I_OffsetTurningMotorPer_ms:=10;
-  Motor01.P_RampUp:=True;
+
+  if (CheckBox1.Checked) then Motor01.P_RampUp:=true;
+  if (not CheckBox1.Checked) then Motor01.P_RampUp:=false;
 
 
   Application.OnIdle := @OnIdle;
@@ -272,9 +282,18 @@ procedure TForm1.Button1Click(Sender: TObject);
 begin
   Motor01.I_MotorRun:= not Motor01.I_MotorRun;
 
+  IF(not Motor01.I_MotorRun) then
+  begin
+    CheckBox1.Enabled:=true;
+  end;
   IF(Motor01.I_MotorRun) then
   begin
-    Motor01.P_RampUp:=True;
+
+    CheckBox1.Enabled:=false;
+
+    if (CheckBox1.Checked) then Motor01.P_RampUp:=true;
+    if (not CheckBox1.Checked) then Motor01.P_RampUp:=false;
+
     Motor01.P_RampUpGearDelay_ms:=0;
 
     Motor01.O_TurningMotorCounter_ms:=0;
