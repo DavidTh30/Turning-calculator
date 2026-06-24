@@ -1,0 +1,39 @@
+FUNCTION_BLOCK TestExitFor 
+
+VAR_INPUT
+    
+END_VAR
+
+VAR_OUTPUT
+  Out01:INT;  //=100
+  Out02:INT;  //=50
+  Out03:INT;  //=100
+  Out04:INT;  //=49
+END_VAR
+
+VAR //Static
+
+END_VAR
+
+VAR_TEMP
+
+  i:INT;
+  i2:INT;
+
+END_VAR
+
+BEGIN
+
+  FOR i := 1 TO 100 DO
+    FOR i2 := 1 TO 100 DO
+      IF i2=50 THEN
+        Out01:=i;
+        Out02:=i2;
+        EXIT;
+      END_IF; 
+    Out03:=i;
+    Out04:=i2; 
+    END_FOR;
+  END_FOR;
+
+END_FUNCTION_BLOCK

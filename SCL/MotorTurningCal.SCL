@@ -1,0 +1,102 @@
+// Case no 100ms tricker, run on OB35 100ms loop cycle
+
+//Motor
+//RPM:1445
+//Gear Ratio:0.01796622  (i:=55.66)
+
+FUNCTION_BLOCK M_Turn_Cal
+
+VAR_INPUT
+    RPM : INT := 500;
+    GearRatio : REAL := 0.5;
+    StopTurn_Set : REAL :=200;
+    StopDurationTime_sec_Set: REAL :=60;
+    ms_per_Cyc : INT := 100;
+    EnableCycle : BOOL := 0;
+    Trick : BOOL := 0;
+END_VAR
+
+VAR_OUTPUT
+  TurnInPosition : BOOL;
+  TurnNotPosition : BOOL;
+  
+END_VAR
+
+VAR 
+  Restart: BOOL :=0;
+  Motor_TurnPer_Cycle_ms : REAL;
+  Motor_TurnPer_S : REAL;
+  Gear_TurnPer_Cycle_ms : REAL;
+  Gear_TurnPer_S : REAL;
+  DurationTime_ms:INT;
+  DurationTime_Sec:INT;
+  LeftOver_ms : INT := 0;
+  Motor_Turn_Actual: REAL;
+  Gear_Turn_Actual: REAL;
+END_VAR
+
+VAR_TEMP
+  Tempo_bool : BOOL;
+END_VAR
+
+BEGIN
+  IF (Restart = 1) THEN 
+    //V2 := FC11 (X1:= FX1, X2 := FX2, Y1 := FY1, Y2 := FY2) ;
+    Restart:=0;
+    Motor_Turn_Actual:=0;
+    Gear_Turn_Actual:=0;
+    DurationTime_ms:=0;
+    DurationTime_Sec:=0;
+    LeftOver_ms:=0;
+  END_IF;
+  
+  IF (Trick = 1) AND ( RPM > 1) AND ( GearRatio > 0) THEN 
+    
+    Motor_TurnPer_Cycle_ms:=((RPM+0.0)/60.0)/(1000.0/(ms_per_Cyc+0.0));
+    Motor_TurnPer_S:=((RPM+0.0)/60.0);
+    Gear_TurnPer_Cycle_ms:=(((RPM+0.0)/60.0)/(1000.0/(ms_per_Cyc+0.0)));
+    Gear_TurnPer_Cycle_ms:=Gear_TurnPer_Cycle_ms*GearRatio;
+    Gear_TurnPer_S:=((RPM+0.0)/60.0);
+    Gear_TurnPer_S:=Gear_TurnPer_S*GearRatio;
+    
+    
+    IF (EnableCycle = 1) AND (NOT TurnInPosition) AND (Restart = 0) THEN
+        
+      DurationTime_ms:=DurationTime_ms+ms_per_Cyc;
+      Motor_Turn_Actual:=Motor_Turn_Actual+Motor_TurnPer_Cycle_ms;
+      Gear_Turn_Actual:=Gear_Turn_Actual+Gear_TurnPer_Cycle_ms;
+      
+      IF (StopTurn_Set <= 0) THEN //Bypass;
+        Motor_Turn_Actual:=0;
+        Gear_Turn_Actual:=0;  
+      END_IF;
+      IF ( StopDurationTime_sec_Set <= 0) THEN //Bypass
+        DurationTime_ms:=0;
+        DurationTime_Sec:=0;
+      END_IF; 
+    
+      IF (DurationTime_ms>=1000) THEN
+        LeftOver_ms:=DurationTime_ms-1000;
+        DurationTime_ms:=LeftOver_ms;
+        LeftOver_ms:=0;
+        DurationTime_Sec:=DurationTime_Sec+1;
+      END_IF;
+       
+    END_IF; 
+    
+  END_IF;
+  
+  TurnInPosition:=0;
+  TurnNotPosition:=1;   
+
+  IF (Gear_Turn_Actual >= StopTurn_Set) AND (StopTurn_Set > 0) THEN
+     TurnInPosition:=1;
+     TurnNotPosition:=0;
+  END_IF ;
+  
+  IF (DurationTime_Sec>=StopDurationTime_sec_Set) AND (StopDurationTime_sec_Set > 0) THEN
+     TurnInPosition:=1;
+     TurnNotPosition:=0;
+  END_IF ;
+    
+END_FUNCTION_BLOCK
